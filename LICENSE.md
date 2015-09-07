@@ -1,6 +1,16 @@
-The MIT License (MIT)
+WP List Network Sites licensing
+===============================
 
-Copyright (c) 2015 Tom Slominski
+This program is distributed under the terms of the MIT license, with absolutely
+no guarantee as to whether it works or not.
+
+Wherever third party code has been used, it will also have been attributed for
+clarity.
+
+The MIT License (MIT)
+---------------------
+
+Copyright (c) 2015 by the contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,4 +29,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
