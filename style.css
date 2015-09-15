@@ -1,11 +1,57 @@
 /*
-Theme Name: List Styles
+Theme Name: List Sites
 Theme URI: http://tomslominski.net/
 Author: Tom Slominski
 Author URI: http://tomslominski.net/
-Description: List themes in a WPMU installation
+Description: List sites in a WPMU installation
 Version: 1.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Tags: 
 */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #F5F5F5;
+	font-family: 'Open Sans';
+	font-size: 62.5%;
+}
+
+.container {
+	width: 30%;
+	margin: 0 auto;
+}
+
+.item {
+	background: white;
+	margin: 10px 0;
+	padding: 30px 20px;
+	box-shadow: 0px 0px 2px 0px rgba( 0, 0, 0, 0.1 );
+}
+
+.item h2 {
+	font-size: 1.8rem;
+	line-height: 1.8rem;
+	margin: 0;
+	margin-bottom: 1rem;
+	color: #2F2F2F;
+}
+
+.item .link {
+	text-decoration: none;
+	color: white;
+	background: #4D4D4D;
+	padding: 3px 6px;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	margin-right: 5px;
+	transition: background 0.5s;
+	display: inline-block;
+}
+
+.item .link:hover {
+	background: #2F2F2F;
+}
