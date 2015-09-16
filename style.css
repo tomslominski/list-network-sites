@@ -1,27 +1,43 @@
 /*
-Theme Name: List Sites
-Theme URI: http://tomslominski.net/
+Theme Name: List Network Sites
+Theme URI: https://github.com/tomslominski/wp-list-network-sites
 Author: Tom Slominski
 Author URI: http://tomslominski.net/
-Description: List sites in a WPMU installation
+Description: List sites in a network installation of WordPress
 Version: 1.0
 License: MIT
-License URI: https://opensource.org/licenses/MIT
-Tags: 
+License URI: https://github.com/tomslominski/wp-list-network-sites/blob/master/LICENSE.md
+*/
+
+/*
+  Global
 */
 
 * {
 	box-sizing: border-box;
 }
 
-a:visited {
+a, a:visited {
 	color: black;
 }
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+/*
+  Layout
+*/
 
 body {
 	background: #F5F5F5;
 	font-family: 'Open Sans';
 	font-size: 62.5%;
+	color: #2F2F2F;
 }
 
 .container {
@@ -29,7 +45,11 @@ body {
 	margin: 0 auto;
 }
 
-header h1 {
+/*
+  Header
+*/
+
+.site-name {
 	font-size: 2.2rem;
 	text-align: center;
 }
@@ -49,6 +69,10 @@ header h1 {
 	border-bottom-color: black;
 }
 
+/*
+  Content
+*/
+
 .item {
 	background: white;
 	margin: 10px 0;
@@ -61,7 +85,6 @@ header h1 {
 	line-height: 1.8rem;
 	margin: 0;
 	margin-bottom: 1rem;
-	color: #2F2F2F;
 }
 
 .item .link {
@@ -80,18 +103,14 @@ header h1 {
 	background: #2F2F2F;
 }
 
-.hide {
-	display: none;
-}
-
-.show {
-	display: block;
-}
-
 .no-results {
 	font-size: 1.4rem;
 	text-align: center;
 }
+
+/*
+  Footer
+*/
 
 footer p {
 	text-align: center;

@@ -13,7 +13,7 @@
 
 		<header>
 
-			<h1><?php echo get_site_option('site_name'); ?></h1>
+			<h1 class="site-name"><?php echo get_site_option('site_name'); ?></h1>
 
 			<input type="search" placeholder="Search sites" id="filter-field" class="search">
 
