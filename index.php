@@ -15,33 +15,41 @@
 
 			<h1><?php echo get_site_option('site_name'); ?></h1>
 
+			<input type="search" placeholder="Search sites" id="filter-field" class="search">
+
 		</header>
 
-		<?php
-
-			$sites = wp_get_sites();
-
-			foreach ($sites as $site) :
-
-				$site = get_blog_details( $site['blog_id'] );
-
-			?>
-				<section class="item">
-
-					<h2><?php echo $site->blogname; ?></h2>
-
-					<div class="links">
-						<a href="<?php echo get_admin_url( $site->blog_id ); ?>" class="link admin">Admin</a>
-						<a href="<?php echo $site->siteurl; ?>" class="link site">Site</a>
-					</div>
-
-				</section>
+		<div class="items">
 
 			<?php
 
-			endforeach;
+				$sites = wp_get_sites();
 
-		?>
+				foreach ($sites as $site) :
+
+					$site = get_blog_details( $site['blog_id'] );
+
+				?>
+					<section class="item" data-name="<?php echo $site->blogname; ?>">
+
+						<h2><?php echo $site->blogname; ?></h2>
+
+						<div class="links">
+							<a href="<?php echo get_admin_url( $site->blog_id ); ?>" class="link admin">Admin</a>
+							<a href="<?php echo $site->siteurl; ?>" class="link site">Site</a>
+						</div>
+
+					</section>
+
+				<?php
+
+				endforeach;
+
+			?>
+
+			<p class="hide no-results">No results. Sorry.</p>
+
+		</div>
 
 		<footer>
 
