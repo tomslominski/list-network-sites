@@ -11,6 +11,12 @@
 
 	<div class="container">
 
+		<header>
+
+			<h1><?php echo get_site_option('site_name'); ?></h1>
+
+		</header>
+
 		<?php
 
 			$sites = wp_get_sites();
@@ -20,22 +26,28 @@
 				$site = get_blog_details( $site['blog_id'] );
 
 			?>
-				<div class="item">
+				<section class="item">
 
 					<h2><?php echo $site->blogname; ?></h2>
-					
+
 					<div class="links">
 						<a href="<?php echo get_admin_url( $site->blog_id ); ?>" class="link admin">Admin</a>
 						<a href="<?php echo $site->siteurl; ?>" class="link site">Site</a>
 					</div>
 
-				</div>
+				</section>
 
 			<?php
 
 			endforeach;
 
 		?>
+
+		<footer>
+
+			<p><a href="https://github.com/tomslominski/wp-list-network-sites" target="_blank">List Network Sites</a> theme by <a href="http://tomslominski.net" target="_blank">Tom Slominski</a>.</p>
+
+		</footer>
 
 	</div>
 

@@ -14,6 +14,10 @@ Tags:
 	box-sizing: border-box;
 }
 
+a:visited {
+	color: black;
+}
+
 body {
 	background: #F5F5F5;
 	font-family: 'Open Sans';
@@ -23,6 +27,11 @@ body {
 .container {
 	width: 30%;
 	margin: 0 auto;
+}
+
+header h1 {
+	font-size: 2.2rem;
+	text-align: center;
 }
 
 .item {
@@ -54,4 +63,8 @@ body {
 
 .item .link:hover {
 	background: #2F2F2F;
+}
+
+footer p {
+	text-align: center;
 }
