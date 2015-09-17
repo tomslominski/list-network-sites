@@ -30,4 +30,16 @@ if( !function_exists( 'ls_load_scripts' ) ) {
 
 }
 
+if( !function_exists( 'ls_init' ) ) {
+
+	function ls_init() {
+
+		load_theme_textdomain( 'list-network-sites', get_template_directory() . '/languages' );
+
+	}
+
+	add_action( 'after_setup_theme', 'ls_init' );
+
+}
+
 ?>
