@@ -116,3 +116,37 @@ body {
 footer p {
 	text-align: center;
 }
+
+/*
+  Media queries
+*/
+
+@media only screen and ( max-width: 480px ) {
+	.container {
+		width: 95%;
+	}
+}
+
+@media only screen and ( min-width: 481px ) and ( max-width: 768px ) {
+	.container {
+		width: 70%;
+	}
+}
+
+@media only screen and ( min-width: 769px ) and ( max-width: 1024px ) {
+	.container {
+		width: 50%;
+	}
+}
+
+@media only screen and ( min-width: 1025px ) and ( max-width: 1366px ) {
+	.container {
+		width: 30%;
+	}
+}
+
+@media only screen and ( min-width: 1367px ) {
+	.container {
+		width: 20%;
+	}
+}
