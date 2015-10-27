@@ -16,7 +16,7 @@
 
 			<h1 class="site-name"><?php echo get_site_option('site_name'); ?></h1>
 
-			<input type="search" placeholder="<?php _e( 'Search sites', 'list-network-sites' ); ?>" id="filter-field" class="search">
+			<input type="search" placeholder="<?php _e( 'Search sites', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus>
 
 		</header>
 
