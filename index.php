@@ -24,11 +24,9 @@
 
 			<?php
 
-				$sites = wp_get_sites();
+				$sites = ls_sort_sites( ls_get_sites(), get_theme_mod( 'ls_sorting_method' ), get_theme_mod( 'ls_sorting_order' ) );
 
 				foreach ($sites as $site) :
-
-					$site = get_blog_details( $site['blog_id'] );
 
 				?>
 					<section class="item" data-name="<?php echo $site->blogname; ?>">
