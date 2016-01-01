@@ -2,6 +2,11 @@
 
 if( !function_exists( 'ls_load_styles' ) ) {
 
+	/**
+	 * Load CSS styles which the theme depends on
+	 *
+	 * @since 1.0
+	 */
 	function ls_load_styles() {
 
 		wp_enqueue_style( 'ls_style', get_stylesheet_uri(), array( 'normalize', 'fonts' ) );
@@ -18,6 +23,11 @@ if( !function_exists( 'ls_load_styles' ) ) {
 
 if( !function_exists( 'ls_load_scripts' ) ) {
 
+	/**
+	 * Load JS scripts which the theme depends on
+	 *
+	 * @since 1.0
+	 */
 	function ls_load_scripts() {
 
 		wp_enqueue_style( 'jquery' );
@@ -32,6 +42,11 @@ if( !function_exists( 'ls_load_scripts' ) ) {
 
 if( !function_exists( 'ls_init' ) ) {
 
+	/**
+	 * Initialise other parts of the theme - textdomain etc.
+	 *
+	 * @since 1.0
+	 */
 	function ls_init() {
 
 		load_theme_textdomain( 'list-network-sites', get_template_directory() . '/languages' );
