@@ -82,7 +82,7 @@ if( !function_exists( 'ls_customizer' ) ) {
 		) );
 
 		// Add controls
-		$wp_customize->add_control( 'ls_sorting_method_control', 
+		$wp_customize->add_control( 'ls_sorting_method_control',
 			array(
 				'label'    => __( 'Sorting method', 'list-network-sites' ),
 				'section'  => 'ls_main',
@@ -98,7 +98,7 @@ if( !function_exists( 'ls_customizer' ) ) {
 			)
 		);
 
-		$wp_customize->add_control( 'ls_sorting_order_control', 
+		$wp_customize->add_control( 'ls_sorting_order_control',
 			array(
 				'label'    => __( 'Sorting order', 'list-network-sites' ),
 				'section'  => 'ls_main',
@@ -126,12 +126,21 @@ if( !function_exists( 'ls_get_sites' ) ) {
 	 */
 	function ls_get_sites() {
 
-		$sites = wp_get_sites(); // Get array of sites
+		if( function_exists( 'get_sites' ) ) {
+			$sites = get_sites(); // Get array of sites
+		} else {
+			$sites = wp_get_sites(); // Get array of sites
+		}
+
 		$sites_detailed = array(); // Define a new array for sites
 
 		// Build a new array with more useful information about the sites
 		foreach ($sites as $site) {
-			$sites_detailed[] = get_blog_details( $site['blog_id'] );
+			if( function_exists( 'get_sites' ) ) {
+				$sites_detailed[] = get_blog_details( $site->blog_id );
+			} else {
+				$sites_detailed[] = get_blog_details( $site['blog_id'] );
+			}
 		}
 
 		// Overwrite the original array
