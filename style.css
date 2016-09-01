@@ -36,7 +36,7 @@ a, a:visited {
 
 body {
 	background: #F5F5F5;
-	font-family: 'Open Sans';
+	font-family: -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif; 
 	font-size: 62.5%;
 	color: #2F2F2F;
 }
