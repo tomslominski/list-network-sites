@@ -36,13 +36,13 @@ a, a:visited {
 
 body {
 	background: #F5F5F5;
-	font-family: -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif; 
+	font-family: -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 62.5%;
 	color: #2F2F2F;
 }
 
 .container {
-	width: 30%;
+	width: 450px;
 	margin: 0 auto;
 }
 
@@ -115,6 +115,7 @@ body {
 
 footer p {
 	text-align: center;
+	margin: 30px 0;
 }
 
 /*
@@ -127,21 +128,23 @@ footer p {
 	}
 }
 
-@media only screen and ( min-width: 481px ) and ( max-width: 768px ) {
+/*@media only screen and ( min-width: 481px ) {
 	.container {
-		width: 70%;
+		width: 400px;
 	}
-}
+}*/
 
-@media only screen and ( min-width: 769px ) and ( max-width: 1024px ) {
+/*@media only screen and ( min-width: 769px ) and ( max-width: 1024px ) {
 	.container {
 		width: 50%;
+		min-width: 400px;
 	}
 }
 
 @media only screen and ( min-width: 1025px ) and ( max-width: 1366px ) {
 	.container {
 		width: 30%;
+		min-width: 400px;
 	}
 }
 
@@ -149,7 +152,7 @@ footer p {
 	.container {
 		width: 20%;
 	}
-}
+}*/
 
 /* Print stylesheet */
 
