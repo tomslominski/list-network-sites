@@ -25,11 +25,12 @@ jQuery(document).ready(function( $ ) {
 		} else {
 
 			$( '.items .item' ).removeClass( 'show hide' );
+			$( '.items .no-results' ).removeClass( 'show' );
 
 		}
 
 	}
 
 	$( '#filter-field' ).on( 'keyup', filterElements );
-	
+
 });
