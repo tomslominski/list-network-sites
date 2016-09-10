@@ -104,6 +104,11 @@ body {
 	background: #2F2F2F;
 }
 
+.pagination {
+	font-size: 1rem;
+	text-align: center;
+}
+
 .no-results {
 	font-size: 1.4rem;
 	text-align: center;

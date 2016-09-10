@@ -23,8 +23,13 @@
 		<div class="items">
 
 			<?php
+				$site_query = new List_Network_Sites( array(
+					'sorting' => get_theme_mod( 'ls_sorting_method' ),
+					'order' => get_theme_mod( 'ls_sorting_order' ),
+					'paged' => get_query_var( 'sites_paged' ) ? absint( get_query_var( 'sites_paged' ) ) : 1,
+				) );
 
-				$sites = ls_sort_sites( ls_get_sites(), get_theme_mod( 'ls_sorting_method' ), get_theme_mod( 'ls_sorting_order' ) );
+				$sites = $site_query->get_sites();
 
 				foreach ($sites as $site) :
 
@@ -45,6 +50,17 @@
 				endforeach;
 
 			?>
+
+			<div class="pagination">
+				<?php
+					echo paginate_links( array(
+						'base' => trailingslashit( get_site_url() ) . '%_%',
+						'format' => 'sites_paged/%#%',
+						'current' => max( 1, get_query_var('sites_paged') ),
+						'total' => $site_query->get_max_num_pages(),
+					) );
+				?>
+			</div>
 
 			<p class="hide no-results"><?php _e( 'No results. Sorry.', 'list-network-sites' ); ?></p>
 
