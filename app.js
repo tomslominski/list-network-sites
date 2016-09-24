@@ -33,7 +33,7 @@ jQuery(document).ready(function( $ ) {
 		}
 
 		getSites( args );
-		history.pushState( 'data', '', i18n.siteUrl + '/sites_paged/' + args.page + '/' );
+		history.pushState( 'data', '', i18n.siteUrl + '/sites_page/' + args.page + '/' );
 
 	}
 

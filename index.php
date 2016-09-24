@@ -26,7 +26,7 @@
 				$site_query = new List_Network_Sites( array(
 					'sorting' => get_theme_mod( 'ls_sorting_method' ),
 					'order' => get_theme_mod( 'ls_sorting_order' ),
-					'paged' => get_query_var( 'sites_paged' ) ? absint( get_query_var( 'sites_paged' ) ) : 1,
+					'page' => get_query_var( 'sites_page' ) ? absint( get_query_var( 'sites_page' ) ) : 1,
 				) );
 
 				echo $site_query->get_html();

@@ -48,7 +48,7 @@ class List_Network_Sites {
             'order' => 'descending',
             'include_primary' => false,
             'posts_per_page' => 5,
-            'paged' => 1,
+            'page' => 1,
             'search' => false
         ), $args );
 
@@ -108,7 +108,7 @@ class List_Network_Sites {
         usort( $this->sites, array( $this, 'sorting_' . $this->args['sorting'] . '_' . $this->args['order'] ) );
 
         // Paging
-        $offset = $this->args['posts_per_page'] * $this->args['paged'] - $this->args['posts_per_page'];
+        $offset = $this->args['posts_per_page'] * $this->args['page'] - $this->args['posts_per_page'];
         $this->sites = array_slice( $this->sites, $offset, 5 );
 
 		return $this->sites;
@@ -170,7 +170,7 @@ class List_Network_Sites {
 
     	<?php
 
-        echo $this->get_pagination( $this->args['paged'] );
+        echo $this->get_pagination( $this->args['page'] );
 
     	return ob_get_clean();
     }
@@ -194,8 +194,8 @@ class List_Network_Sites {
 
                 <?php if( $current > 1 ) : ?>
                     <div class="section back-buttons">
-                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/1'; ?>" data-page="1" class="button first" title="<?php _e( 'Go to the first page', 'list-network-sites' ); ?>">&laquo;</a>
-                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/' . $previous; ?>" data-page="<?php echo $previous; ?>" class="button previous" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current - 1 ); ?>">&lsaquo;</a>
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_page/1'; ?>" data-page="1" class="button first" title="<?php _e( 'Go to the first page', 'list-network-sites' ); ?>">&laquo;</a>
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_page/' . $previous; ?>" data-page="<?php echo $previous; ?>" class="button previous" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current - 1 ); ?>">&lsaquo;</a>
                     </div>
                 <?php endif; ?>
 
@@ -211,8 +211,8 @@ class List_Network_Sites {
 
                 <?php if( $current < $maximum ) : ?>
                     <div class="section next-buttons">
-                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/' . $next; ?>" data-page="<?php echo $next; ?>" class="button next" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current + 1 ); ?>">&rsaquo;</a>
-                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/' . $maximum; ?>" data-page="<?php echo $maximum; ?>" class="button last" title="<?php _e( 'Go to the last page', 'list-network-sites' ); ?>">&raquo;</a>
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_page/' . $next; ?>" data-page="<?php echo $next; ?>" class="button next" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current + 1 ); ?>">&rsaquo;</a>
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_page/' . $maximum; ?>" data-page="<?php echo $maximum; ?>" class="button last" title="<?php _e( 'Go to the last page', 'list-network-sites' ); ?>">&raquo;</a>
                     </div>
                 <?php endif; ?>
 

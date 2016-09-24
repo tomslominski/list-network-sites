@@ -128,7 +128,7 @@ if( !function_exists( 'lns_filter_query_vars' ) ) {
 	 * @since 1.1
 	 */
 	function lns_filter_query_vars( $vars ) {
-		$vars[] = 'sites_paged';
+		$vars[] = 'sites_page';
 		return $vars;
 	}
 
@@ -144,7 +144,7 @@ if( !function_exists( 'lns_populate_query_vars' ) ) {
 	 * @since 1.1
 	 */
 	function lns_populate_query_vars() {
-		add_rewrite_rule( 'sites_paged/?([0-9]{1,})/?$', 'index.php?&sites_paged=$matches[1]', 'top' );
+		add_rewrite_rule( 'sites_page/?([0-9]{1,})/?$', 'index.php?&sites_page=$matches[1]', 'top' );
 	}
 
 	add_filter( 'init', 'lns_populate_query_vars' );
@@ -158,8 +158,7 @@ function js_get_sites() {
 	$site_query = new List_Network_Sites( array(
 		'sorting' => get_theme_mod( 'ls_sorting_method' ),
 		'order' => get_theme_mod( 'ls_sorting_order' ),
-		// 'paged' => get_query_var( 'sites_paged' ) ? absint( get_query_var( 'sites_paged' ) ) : 1,
-		'paged' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
+		'page' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
 		'search' => $_POST['search_value'],
 	) );
 
