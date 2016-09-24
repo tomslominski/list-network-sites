@@ -28,7 +28,13 @@ if( !function_exists( 'ls_load_scripts' ) ) {
 
 		wp_enqueue_style( 'jquery' );
 
-		wp_enqueue_script( 'ls_app', get_template_directory_uri() . '/app.js', array( 'jquery' ), false, true );
+		wp_register_script( 'ls_app', get_template_directory_uri() . '/app.js', array( 'jquery' ), false, true );
+		$data = array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'siteUrl' => site_url()
+		);
+		wp_localize_script( 'ls_app', 'i18n', $data );
+		wp_enqueue_script( 'ls_app' );
 
 	}
 
@@ -143,6 +149,23 @@ if( !function_exists( 'lns_populate_query_vars' ) ) {
 
 	add_filter( 'init', 'lns_populate_query_vars' );
 
+}
+
+add_action( 'wp_ajax_lns_get_sites', 'js_get_sites' );
+add_action( 'wp_ajax_nopriv_lns_get_sites', 'js_get_sites' );
+
+function js_get_sites() {
+	$site_query = new List_Network_Sites( array(
+		'sorting' => get_theme_mod( 'ls_sorting_method' ),
+		'order' => get_theme_mod( 'ls_sorting_order' ),
+		// 'paged' => get_query_var( 'sites_paged' ) ? absint( get_query_var( 'sites_paged' ) ) : 1,
+		'paged' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
+		'search' => $_POST['search_value'],
+	) );
+
+	echo $site_query->get_html();
+
+	wp_die();
 }
 
 ?>

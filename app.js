@@ -1,36 +1,58 @@
 jQuery(document).ready(function( $ ) {
 
-	function filterElements() {
+	function getSites( args ) {
 
-		var filterCriteria = $( '#filter-field' ).val();
-		var regex = new RegExp( filterCriteria, 'gi' );
-
-		if( filterCriteria.length > 0 ) {
-
-			$( '.items .item' ).each( function() {
-				if( $( this ).data('name').match( regex ) !== null ) {
-					$( this ).addClass( 'show' );
-				} else {
-					$( this ).removeClass( 'show' );
-					$( this ).addClass( 'hide' );
-				}
-			});
-
-			if( $( '.items .item' ).hasClass('show') === false ) {
-				$( '.items .no-results' ).addClass( 'show' );
-			} else {
-				$( '.items .no-results' ).removeClass( 'show' );
-			}
-
-		} else {
-
-			$( '.items .item' ).removeClass( 'show hide' );
-			$( '.items .no-results' ).removeClass( 'show' );
-
+		var data = {
+			action: 'lns_get_sites',
+			search_value: $( '#filter-field' ).val(),
+			page: typeof args != 'undefined' ? args.page : 1
 		}
+
+		$.ajax({
+			dataType: 'html',
+			data: data,
+			method: 'POST',
+			url: i18n.ajaxUrl,
+			success: function( response ) {
+				$( '.items-wrapper' ).html( response );
+			}
+		});
 
 	}
 
-	$( '#filter-field' ).on( 'keyup', filterElements );
+	function paginationGetSites( eventData ) {
+
+		event.preventDefault();
+
+		if( $( eventData.target ).hasClass( 'pager-form' ) ) {
+			var args = {
+				page: $( eventData.target ).find( 'input' ).val()
+			}
+		} else if( $( eventData.target ).hasClass( 'button' ) ) {
+			var args = $( eventData.target ).data();
+		}
+
+		getSites( args );
+		history.pushState( 'data', '', i18n.siteUrl + '/sites_paged/' + args.page + '/' );
+
+	}
+
+	// Source: http://stackoverflow.com/a/1909508
+	var delay = (function(){
+		var timer = 0;
+		return function(callback, ms){
+			clearTimeout (timer);
+			timer = setTimeout(callback, ms);
+		};
+	})();
+
+	$( '#filter-field' ).keyup(function() {
+		delay( getSites, 500 );
+	});
+
+	$( '.container header' ).on( 'search', '#filter-field', this, getSites );
+	$( '.items-wrapper' ).on( 'click', '.pagination .button', this, paginationGetSites );
+	$( '.items-wrapper' ).on( 'submit', '.pagination .pager-form', this, paginationGetSites );
+	$( '.container' ).on( 'click', '#ajax', this, getSites );
 
 });

@@ -20,7 +20,7 @@
 
 		</header>
 
-		<div class="items">
+		<div class="items-wrapper">
 
 			<?php
 				$site_query = new List_Network_Sites( array(
@@ -29,40 +29,8 @@
 					'paged' => get_query_var( 'sites_paged' ) ? absint( get_query_var( 'sites_paged' ) ) : 1,
 				) );
 
-				$sites = $site_query->get_sites();
-
-				foreach ($sites as $site) :
-
-				?>
-					<section class="item" data-name="<?php echo $site->blogname; ?>">
-
-						<h2><?php echo $site->blogname; ?></h2>
-
-						<div class="links">
-							<a href="<?php echo get_admin_url( $site->blog_id ); ?>" class="link admin"><?php _e( 'Admin', 'list-network-sites' ); ?></a>
-							<a href="<?php echo $site->siteurl; ?>" class="link site"><?php _e( 'Site', 'list-network-sites' ); ?></a>
-						</div>
-
-					</section>
-
-				<?php
-
-				endforeach;
-
+				echo $site_query->get_html();
 			?>
-
-			<div class="pagination">
-				<?php
-					echo paginate_links( array(
-						'base' => trailingslashit( get_site_url() ) . '%_%',
-						'format' => 'sites_paged/%#%',
-						'current' => max( 1, get_query_var('sites_paged') ),
-						'total' => $site_query->get_max_num_pages(),
-					) );
-				?>
-			</div>
-
-			<p class="hide no-results"><?php _e( 'No results. Sorry.', 'list-network-sites' ); ?></p>
 
 		</div>
 

@@ -104,14 +104,53 @@ body {
 	background: #2F2F2F;
 }
 
-.pagination {
-	font-size: 1rem;
-	text-align: center;
-}
-
 .no-results {
 	font-size: 1.4rem;
 	text-align: center;
+}
+
+/* Pagination */
+.pagination {
+	font-size: 1rem;
+	text-align: center;
+	position: relative;
+}
+
+.pagination .button, .pagination .pager input {
+	background: white;
+	padding: 4px 8px 6px 8px;
+	line-height: 20px;
+	border: 1px solid #E0E0E0;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	transition: background 0.2s;
+}
+
+.pagination .pager input {
+	width: 50px;
+	padding: 5px;
+	font-size: 1rem;
+}
+
+.pagination .button {
+	text-decoration: none;
+}
+
+.pagination .button:hover {
+	background: #ebebeb;
+}
+
+.pagination .back-buttons {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.pagination .next-buttons {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 /*

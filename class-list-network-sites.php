@@ -48,7 +48,8 @@ class List_Network_Sites {
             'order' => 'descending',
             'include_primary' => false,
             'posts_per_page' => 5,
-            'paged' => 1
+            'paged' => 1,
+            'search' => false
         ), $args );
 
         // Error checking
@@ -79,10 +80,22 @@ class List_Network_Sites {
 			$this->sites = wp_get_sites();
 		}
 
-        // Filter the sites to remove the primary site
-        if( $this->args['include_primary'] == false ) {
-            foreach ( $this->sites as $id => $site ) {
-                if( $site->blog_id == BLOG_ID_CURRENT_SITE ) {
+        // Filter the sites
+        foreach ( $this->sites as $id => $site ) {
+            // Get more details
+            $this->sites[$id] = get_blog_details( $site->id );
+
+            // Remove primary site
+            if( $this->args['include_primary'] == false && $site->blog_id == BLOG_ID_CURRENT_SITE ) {
+                unset( $this->sites[$id] );
+            }
+
+            // Filter by search term
+            if( $this->args['search'] != false ) {
+                $name = strtolower( $site->blogname );
+                $search = strtolower( $this->args['search'] );
+
+                if( !strstr( $name, $search ) ) {
                     unset( $this->sites[$id] );
                 }
             }
@@ -127,6 +140,88 @@ class List_Network_Sites {
      */
     public function return_sites() {
         return $this->sites;
+    }
+
+    public function get_html() {
+
+    	ob_start();
+
+        if( empty( $this->sites ) ) : ?>
+            <p class="no-results"><?php _e( 'No results. Sorry.', 'list-network-sites' ); ?></p>
+        <?php endif;
+    	?>
+
+    	<div class="items">
+    		<?php foreach ($this->sites as $site) : ?>
+
+    			<section class="item" data-name="<?php echo $site->blogname; ?>">
+
+    				<h2><?php echo $site->blogname; ?></h2>
+
+    				<div class="links">
+    					<a href="<?php echo get_admin_url( $site->blog_id ); ?>" class="link admin"><?php _e( 'Admin', 'list-network-sites' ); ?></a>
+    					<a href="<?php echo $site->siteurl; ?>" class="link site"><?php _e( 'Site', 'list-network-sites' ); ?></a>
+    				</div>
+
+    			</section>
+
+    		<?php endforeach; ?>
+    	</div>
+
+    	<?php
+
+        echo $this->get_pagination( $this->args['paged'] );
+
+    	return ob_get_clean();
+    }
+
+    public function get_pagination( $current = 1 ) {
+
+        if( $this->get_max_num_pages() < 2 ) {
+            return false;
+        }
+
+        $maximum = $this->get_max_num_pages();
+
+        $previous = $current - 1;
+        $next = $current + 1;
+
+        ob_start();
+
+        ?>
+
+            <div class="pagination">
+
+                <?php if( $current > 1 ) : ?>
+                    <div class="section back-buttons">
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/1'; ?>" data-page="1" class="button first" title="<?php _e( 'Go to the first page', 'list-network-sites' ); ?>">&laquo;</a>
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/' . $previous; ?>" data-page="<?php echo $previous; ?>" class="button previous" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current - 1 ); ?>">&lsaquo;</a>
+                    </div>
+                <?php endif; ?>
+
+                <div class="section pager">
+                    <form class="pager-form">
+                        <?php
+                            $input = '<input type="number" min="1" max="' . $maximum . '" value="' . $current . '">';
+
+                            printf( __( 'Page %1$s of %2$d', 'list-network-sites' ), $input, $maximum );
+                        ?>
+                    </form>
+                </div>
+
+                <?php if( $current < $maximum ) : ?>
+                    <div class="section next-buttons">
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/' . $next; ?>" data-page="<?php echo $next; ?>" class="button next" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current + 1 ); ?>">&rsaquo;</a>
+                        <a href="<?php echo trailingslashit( get_site_url() ) . 'sites_paged/' . $maximum; ?>" data-page="<?php echo $maximum; ?>" class="button last" title="<?php _e( 'Go to the last page', 'list-network-sites' ); ?>">&raquo;</a>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+
+        <?php
+
+        return ob_get_clean();
+
     }
 
     /**
