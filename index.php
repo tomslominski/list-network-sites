@@ -16,6 +16,15 @@
 
 			<h1 class="site-name"><?php echo get_site_option('site_name'); ?></h1>
 
+			<div class="tools">
+				<h2><?php _e( 'Network Management', 'list-network-sites' ); ?></h2>
+				<a href="<?php echo network_admin_url( 'site-new.php' ); ?>" class="link"><?php _e( 'Add New Site', 'list-network-sites' ); ?></a>
+				<a href="<?php echo network_admin_url( 'users.php' ); ?>" class="link"><?php _e( 'All Users', 'list-network-sites' ); ?></a>
+				<a href="<?php echo network_admin_url( 'themes.php' ); ?>" class="link"><?php _e( 'Themes', 'list-network-sites' ); ?></a>
+				<a href="<?php echo network_admin_url( 'plugins.php' ); ?>" class="link"><?php _e( 'Plugins', 'list-network-sites' ); ?></a>
+				<a href="<?php echo network_admin_url( 'settings.php' ); ?>" class="link"><?php _e( 'Network Settings', 'list-network-sites' ); ?></a>
+			</div>
+
 			<input type="search" placeholder="<?php _e( 'Search sites', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus>
 
 		</header>

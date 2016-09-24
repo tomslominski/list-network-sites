@@ -57,6 +57,10 @@ body {
 	text-align: center;
 }
 
+.tools {
+	margin: 20px 0;
+}
+
 .search[type="search"] {
 	border: none;
 	border-bottom: 1px solid #A9A9A9;
@@ -90,7 +94,7 @@ body {
 	margin-bottom: 1rem;
 }
 
-.item .link {
+a.link {
 	text-decoration: none;
 	color: white;
 	background: #4D4D4D;
@@ -98,11 +102,12 @@ body {
 	text-transform: uppercase;
 	font-size: 0.8rem;
 	margin-right: 5px;
+	margin-bottom: 5px;
 	transition: background 0.5s;
 	display: inline-block;
 }
 
-.item .link:hover {
+a.link:hover {
 	background: #2F2F2F;
 }
 
