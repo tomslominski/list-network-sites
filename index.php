@@ -22,15 +22,21 @@
 
 		<div class="items-wrapper">
 
-			<?php
-				$site_query = new List_Network_Sites( array(
-					'sorting' => get_theme_mod( 'ls_sorting_method' ),
-					'order' => get_theme_mod( 'ls_sorting_order' ),
-					'page' => get_query_var( 'sites_page' ) ? absint( get_query_var( 'sites_page' ) ) : 1,
-				) );
+			<div class="items-container">
+				<?php
+					$site_query = new List_Network_Sites( array(
+						'sorting' => get_theme_mod( 'ls_sorting_method' ),
+						'order' => get_theme_mod( 'ls_sorting_order' ),
+						'page' => get_query_var( 'sites_page' ) ? absint( get_query_var( 'sites_page' ) ) : 1,
+					) );
 
-				echo $site_query->get_html();
-			?>
+					echo $site_query->get_html();
+				?>
+			</div>
+
+			<div class="items-overlay hide">
+				<span class="loader">
+			</div>
 
 		</div>
 

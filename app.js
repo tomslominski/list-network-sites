@@ -13,8 +13,14 @@ jQuery(document).ready(function( $ ) {
 			data: data,
 			method: 'POST',
 			url: i18n.ajaxUrl,
+			beforeSend: function() {
+				$( '.items-overlay' ).removeClass( 'hide' );
+				$( '.items-overlay' ).addClass( 'show' );
+			},
 			success: function( response ) {
-				$( '.items-wrapper' ).html( response );
+				$( '.items-container' ).html( response );
+				$( '.items-overlay' ).addClass( 'hide' );
+				$( '.items-overlay' ).removeClass( 'show' );
 			}
 		});
 
