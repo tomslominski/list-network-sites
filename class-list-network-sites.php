@@ -41,13 +41,15 @@ class List_Network_Sites {
      */
     public function __construct( $args = array() ) {
 
+        $per_page = get_theme_mod( 'ls_sites_per_page' );
+
         // Merge with defaults
         $this->args = array_merge( array(
             'offset' => 0,
             'sorting' => 'id',
             'order' => 'descending',
             'include_primary' => true,
-            'posts_per_page' => 5,
+            'posts_per_page' => !empty( $per_page ) ? $per_page : 10,
             'page' => 1,
             'search' => false
         ), $args );
@@ -109,7 +111,7 @@ class List_Network_Sites {
 
         // Paging
         $offset = $this->args['posts_per_page'] * $this->args['page'] - $this->args['posts_per_page'];
-        $this->sites = array_slice( $this->sites, $offset, 5 );
+        $this->sites = array_slice( $this->sites, $offset, $this->args['posts_per_page'] );
 
 		return $this->sites;
 

@@ -83,6 +83,10 @@ if( !function_exists( 'ls_customizer' ) ) {
 			'default'     => 'ascending'
 		) );
 
+		$wp_customize->add_setting( 'ls_sites_per_page' , array(
+			'default'     => 10
+		) );
+
 		// Add controls
 		$wp_customize->add_control( 'ls_sorting_method_control',
 			array(
@@ -110,6 +114,15 @@ if( !function_exists( 'ls_customizer' ) ) {
 					'ascending'  => __( 'Ascending', 'list-network-sites' ),
 					'descending' => __( 'Descending', 'list-network-sites' ),
 				),
+			)
+		);
+
+		$wp_customize->add_control( 'ls_sites_per_page_control',
+			array(
+				'label'    => __( 'Sites per page', 'list-network-sites' ),
+				'section'  => 'ls_main',
+				'settings' => 'ls_sites_per_page',
+				'type'     => 'number',
 			)
 		);
 
@@ -166,7 +179,7 @@ function js_get_sites() {
 	echo $site_query->get_html();
 
 	wp_die();
-	
+
 }
 
 ?>
