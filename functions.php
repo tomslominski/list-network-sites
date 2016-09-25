@@ -155,9 +155,10 @@ add_action( 'wp_ajax_lns_get_sites', 'js_get_sites' );
 add_action( 'wp_ajax_nopriv_lns_get_sites', 'js_get_sites' );
 
 function js_get_sites() {
+
 	$site_query = new List_Network_Sites( array(
-		'sorting' => get_theme_mod( 'ls_sorting_method' ),
-		'order' => get_theme_mod( 'ls_sorting_order' ),
+		'sorting' => !empty( $_POST['sorting'] ) ? $_POST['sorting'] : 'id',
+		'order' => !empty( $_POST['order'] ) ? $_POST['order'] : 'ascending',
 		'page' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
 		'search' => $_POST['search_value'],
 	) );
@@ -165,6 +166,7 @@ function js_get_sites() {
 	echo $site_query->get_html();
 
 	wp_die();
+	
 }
 
 ?>

@@ -46,7 +46,7 @@ class List_Network_Sites {
             'offset' => 0,
             'sorting' => 'id',
             'order' => 'descending',
-            'include_primary' => false,
+            'include_primary' => true,
             'posts_per_page' => 5,
             'page' => 1,
             'search' => false
