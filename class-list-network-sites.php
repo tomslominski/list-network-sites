@@ -88,8 +88,7 @@ class List_Network_Sites {
             if( function_exists( 'get_sites' ) ) {
     			$this->sites[$id] = get_blog_details( $site->id );
     		} else {
-                var_dump( $site );
-    			// $this->sites[$id] = get_blog_details( $site['id'] );
+                $this->sites[$id] = get_blog_details( $site['blog_id'] );
     		}
 
             // Remove primary site
