@@ -85,7 +85,12 @@ class List_Network_Sites {
         // Filter the sites
         foreach ( $this->sites as $id => $site ) {
             // Get more details
-            $this->sites[$id] = get_blog_details( $site->id );
+            if( function_exists( 'get_sites' ) ) {
+    			$this->sites[$id] = get_blog_details( $site->id );
+    		} else {
+                var_dump( $site );
+    			// $this->sites[$id] = get_blog_details( $site['id'] );
+    		}
 
             // Remove primary site
             if( $this->args['include_primary'] == false && $site->blog_id == BLOG_ID_CURRENT_SITE ) {
