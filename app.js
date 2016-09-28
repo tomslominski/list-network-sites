@@ -14,7 +14,7 @@ jQuery(document).ready(function( $ ) {
 			dataType: 'html',
 			data: data,
 			method: 'POST',
-			url: i18n.ajaxUrl,
+			url: lnsi18n.ajaxUrl,
 			beforeSend: function() {
 				$( '.items-overlay' ).removeClass( 'hide' );
 				$( '.items-overlay' ).addClass( 'show' );
@@ -41,7 +41,7 @@ jQuery(document).ready(function( $ ) {
 		}
 
 		getSites( args );
-		history.pushState( 'data', '', i18n.siteUrl + '/sites_page/' + args.page + '/' );
+		history.pushState( 'data', '', lnsi18n.siteUrl + '/sites_page/' + args.page + '/' );
 
 	}
 

@@ -33,7 +33,7 @@ if( !function_exists( 'ls_load_scripts' ) ) {
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 			'siteUrl' => site_url()
 		);
-		wp_localize_script( 'ls_app', 'i18n', $data );
+		wp_localize_script( 'ls_app', 'lnsi18n', $data );
 		wp_enqueue_script( 'ls_app' );
 
 	}
