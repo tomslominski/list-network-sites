@@ -149,7 +149,7 @@ jQuery(document).ready(function( $ ) {
 	  Event handlers
 	============================================ */
 	$( '#filter-field' ).keyup(function() {
-		delay( handleSearch, 500 );
+		delay( LNS.handle.search, 500 );
 	});
 
 	$( '.container header' ).on( 'search', '#filter-field', this, LNS.handle.search );
