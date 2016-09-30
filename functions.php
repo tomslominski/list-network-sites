@@ -141,11 +141,13 @@ if( !function_exists( 'lns_filter_query_vars' ) ) {
 	 * @since 1.1
 	 */
 	function lns_filter_query_vars( $vars ) {
+
 		$vars[] = 'sites_page';
 		$vars[] = 'sites_sorting_method';
 		$vars[] = 'sites_sorting_order';
 		$vars[] = 'sites_search';
 		return $vars;
+
 	}
 
 	add_filter( 'query_vars', 'lns_filter_query_vars' );
@@ -155,36 +157,49 @@ if( !function_exists( 'lns_filter_query_vars' ) ) {
 if( !function_exists( 'lns_populate_query_vars' ) ) {
 
 	/**
-	 * Set up pretty permalinks for the sites pagination.
+	 * Set up pretty permalinks for the sites pagination. The structure
+	 * is: example.com/sites/[sorting_method]/[sorting_order]/[page]/[search]
 	 *
 	 * @since 1.1
 	 */
 	function lns_populate_query_vars() {
+
 		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)\/(ascending|descending)\/([0-9]{1,})\/([^\/]+)', 'index.php?&sites_sorting_method=$matches[1]&sites_sorting_order=$matches[2]&sites_page=$matches[3]&sites_search=$matches[4]', 'top' );
 		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)\/(ascending|descending)\/([0-9]{1,})', 'index.php?&sites_sorting_method=$matches[1]&sites_sorting_order=$matches[2]&sites_page=$matches[3]', 'top' );
 		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)\/(ascending|descending)', 'index.php?&sites_sorting_method=$matches[1]&sites_sorting_order=$matches[2]', 'top' );
 		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)', 'index.php?&sites_sorting_method=$matches[1]', 'top' );
+
 	}
 
 	add_filter( 'init', 'lns_populate_query_vars' );
 
 }
 
-add_action( 'wp_ajax_lns_get_sites', 'js_get_sites' );
-add_action( 'wp_ajax_nopriv_lns_get_sites', 'js_get_sites' );
+if( !function_exists( 'lns_js_get_sites' ) ) {
 
-function js_get_sites() {
+	/**
+	 * WP AJAX function for getting the HTML of the list of sites.
+	 * Called every time the user filters the list of sites.
+	 *
+	 * @since 1.1
+	 */
+	function lns_js_get_sites() {
 
-	$site_query = new List_Network_Sites( array(
-		'sorting' => !empty( $_POST['sorting'] ) ? $_POST['sorting'] : 'id',
-		'order' => !empty( $_POST['order'] ) ? $_POST['order'] : 'ascending',
-		'page' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
-		'search' => $_POST['search_value'],
-	) );
+		$site_query = new List_Network_Sites( array(
+			'sorting' => !empty( $_POST['sorting'] ) ? $_POST['sorting'] : 'id',
+			'order' => !empty( $_POST['order'] ) ? $_POST['order'] : 'ascending',
+			'page' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
+			'search' => $_POST['search_value'],
+		) );
 
-	echo $site_query->get_html();
+		echo $site_query->get_html();
 
-	wp_die();
+		wp_die();
+
+	}
+
+	add_action( 'wp_ajax_lns_get_sites', 'lns_js_get_sites' );
+	add_action( 'wp_ajax_nopriv_lns_get_sites', 'lns_js_get_sites' );
 
 }
 
