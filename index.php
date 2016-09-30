@@ -65,7 +65,7 @@
 				<div class="sorting-order">
 					<h2><?php _e( 'Sorting Order', 'list-network-sites' ); ?></h2>
 
-					<select id="sorting-method">
+					<select id="sorting-order">
 						<option value="ascending" <?php selected( 'ascending', $sorting_order ); ?>><?php _e( 'Ascending', 'list-network-sites' ); ?></a>
 						<option value="descending" <?php selected( 'descending', $sorting_order ); ?>><?php _e( 'Descending', 'list-network-sites' ); ?></a>
 					</select>
