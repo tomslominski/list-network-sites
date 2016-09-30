@@ -32,7 +32,7 @@
 	}
 ?>
 
-<body <?php body_class(); ?> data-lns-sorting-method="<?php echo $sorting_method; ?>" data-lns-sorting-order="<?php echo $sorting_order; ?>">
+<body <?php body_class(); ?> data-lns-sorting-method="<?php echo $sorting_method; ?>" data-lns-sorting-order="<?php echo $sorting_order; ?>" data-lns-page="<?php echo get_query_var( 'sites_page' ); ?>">
 
 	<div class="container">
 
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 
-			<input type="search" placeholder="<?php _e( 'Search sites', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus>
+			<input type="search" placeholder="<?php _e( 'Search sites', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus value="<?php echo get_query_var( 'sites_search' ); ?>">
 
 		</header>
 
@@ -80,10 +80,16 @@
 
 			<div class="items-container">
 				<?php
+					$sorting_method = get_query_var( 'sites_sorting_method' );
+					$sorting_order = get_query_var( 'sites_sorting_order' );
+					$page = get_query_var( 'sites_page' );
+					$search = get_query_var( 'sites_search' );
+
 					$site_query = new List_Network_Sites( array(
-						'sorting' => $sorting_method,
-						'order' => $sorting_order,
-						'page' => get_query_var( 'sites_page' ) ? absint( get_query_var( 'sites_page' ) ) : 1,
+						'sorting' => !empty( $sorting_method ) ? $sorting_method : 'id',
+						'order' => !empty( $sorting_order ) ? $sorting_order : 'ascending',
+						'page' => !empty( $page ) ? $page : 1,
+						'search' => $search,
 					) );
 
 					echo $site_query->get_html();

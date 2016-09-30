@@ -31,7 +31,7 @@ if( !function_exists( 'ls_load_scripts' ) ) {
 		wp_register_script( 'ls_app', get_template_directory_uri() . '/app.js', array( 'jquery' ), false, true );
 		$data = array(
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-			'siteUrl' => site_url()
+			'siteUrl' => trailingslashit( site_url() )
 		);
 		wp_localize_script( 'ls_app', 'lnsi18n', $data );
 		wp_enqueue_script( 'ls_app' );
@@ -142,6 +142,9 @@ if( !function_exists( 'lns_filter_query_vars' ) ) {
 	 */
 	function lns_filter_query_vars( $vars ) {
 		$vars[] = 'sites_page';
+		$vars[] = 'sites_sorting_method';
+		$vars[] = 'sites_sorting_order';
+		$vars[] = 'sites_search';
 		return $vars;
 	}
 
@@ -157,7 +160,10 @@ if( !function_exists( 'lns_populate_query_vars' ) ) {
 	 * @since 1.1
 	 */
 	function lns_populate_query_vars() {
-		add_rewrite_rule( 'sites_page/?([0-9]{1,})/?$', 'index.php?&sites_page=$matches[1]', 'top' );
+		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)\/(ascending|descending)\/([0-9]{1,})\/([^\/]+)', 'index.php?&sites_sorting_method=$matches[1]&sites_sorting_order=$matches[2]&sites_page=$matches[3]&sites_search=$matches[4]', 'top' );
+		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)\/(ascending|descending)\/([0-9]{1,})', 'index.php?&sites_sorting_method=$matches[1]&sites_sorting_order=$matches[2]&sites_page=$matches[3]', 'top' );
+		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)\/(ascending|descending)', 'index.php?&sites_sorting_method=$matches[1]&sites_sorting_order=$matches[2]', 'top' );
+		add_rewrite_rule( 'sites\/(alphabetical|date_registered|date_updated|post_count|id)', 'index.php?&sites_sorting_method=$matches[1]', 'top' );
 	}
 
 	add_filter( 'init', 'lns_populate_query_vars' );

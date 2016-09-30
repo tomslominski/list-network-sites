@@ -1,11 +1,11 @@
 jQuery(document).ready(function( $ ) {
 
-	function getSites( args ) {
+	function getSites() {
 
 		var data = {
 			action: 'lns_get_sites',
-			search_value: $( '#filter-field' ).val(),
-			page: typeof args != 'undefined' ? args.page : 1,
+			search_value: $( 'body' ).data( 'lns-search' ),
+			page: $( 'body' ).data( 'lns-page' ),
 			sorting: $( 'body' ).data( 'lns-sorting-method' ),
 			order: $( 'body' ).data( 'lns-sorting-order' )
 		}
@@ -23,26 +23,34 @@ jQuery(document).ready(function( $ ) {
 				$( '.items-container' ).html( response );
 				$( '.items-overlay' ).addClass( 'hide' );
 				$( '.items-overlay' ).removeClass( 'show' );
+
+				updateUrl();
 			}
 		});
 
 	}
 
-	function paginationGetSites( eventData ) {
+	function updateUrl() {
 
-		event.preventDefault();
-
-		if( $( eventData.target ).hasClass( 'pager-form' ) ) {
-			var args = {
-				page: $( eventData.target ).find( 'input' ).val()
-			}
-		} else if( $( eventData.target ).hasClass( 'button' ) ) {
-			var args = $( eventData.target ).data();
+		var data = {
+			sorting_method: $( 'body' ).data( 'lns-sorting-method' ),
+			sorting_order: $( 'body' ).data( 'lns-sorting-order' ),
+			page: $( 'body' ).data( 'lns-page' ),
+			search: $( 'body' ).data( 'lns-search' )
 		}
 
-		getSites( args );
-		history.pushState( 'data', '', lnsi18n.siteUrl + '/sites_page/' + args.page + '/' );
+		var url = lnsi18n.siteUrl + 'sites/';
 
+		$.each( data, function( param, value ) {
+			if( param == 'page' && value == 1 && !data.search ) { // SC
+				return true;
+			} else if( value ) {
+				url += value + '/';
+			}
+		} );
+
+		history.pushState( 'data', '', url );
+		
 	}
 
 	function handleSortingMethod( eventData ) {
@@ -57,6 +65,32 @@ jQuery(document).ready(function( $ ) {
 		var value = $( eventData.target ).val();
 		createCookie( 'lnsSortingOrder', value );
 		$( 'body' ).data( 'lns-sorting-order', value );
+
+		getSites();
+	}
+
+	function handleSearch() {
+		var value = $( '#filter-field' ).val();
+		$( 'body' ).data( 'lns-search', value );
+		$( 'body' ).data( 'lns-page', 1 );
+
+		getSites();
+	}
+
+	function handlePageInput() {
+		event.preventDefault();
+
+		var value = $( 'input', this ).val();
+		$( 'body' ).data( 'lns-page', value );
+
+		getSites();
+	}
+
+	function handlePageButtons() {
+		event.preventDefault();
+
+		var value = $( this ).data( 'page' );
+		$( 'body' ).data( 'lns-page', value );
 
 		getSites();
 	}
@@ -88,8 +122,6 @@ jQuery(document).ready(function( $ ) {
 		createCookie(name,"",-1);
 	}
 
-	// console.log( readCookie( 'wp-settings-time-1' ) );
-
 	// Source: http://stackoverflow.com/a/1909508
 	var delay = (function(){
 		var timer = 0;
@@ -100,13 +132,12 @@ jQuery(document).ready(function( $ ) {
 	})();
 
 	$( '#filter-field' ).keyup(function() {
-		delay( getSites, 500 );
+		delay( handleSearch, 500 );
 	});
 
-	$( '.container header' ).on( 'search', '#filter-field', this, getSites );
-	$( '.items-wrapper' ).on( 'click', '.pagination .button', this, paginationGetSites );
-	$( '.items-wrapper' ).on( 'submit', '.pagination .pager-form', this, paginationGetSites );
-	// $( '.container' ).on( 'click', '#ajax', this, getSites );
+	$( '.container header' ).on( 'search', '#filter-field', this, handleSearch );
+	$( '.items-wrapper' ).on( 'click', '.pagination .button', this, handlePageButtons );
+	$( '.items-wrapper' ).on( 'submit', '.pagination .pager-form', this, handlePageInput );
 	$( '.container .tools' ).on( 'change', '.sorting-method', this, handleSortingMethod );
 	$( '.container .tools' ).on( 'change', '.sorting-order', this, handleSortingOrder );
 
