@@ -159,19 +159,22 @@ class List_Network_Sites {
 
     	<div class="items">
     		<?php foreach ($this->sites as $site) : ?>
+                <?php switch_to_blog( $site->blog_id ); ?>
 
-    			<section class="item" data-name="<?php echo $site->blogname; ?>">
+    			<section class="item" data-name="<?php echo get_bloginfo( 'name' ); ?>">
 
-    				<h2><?php echo $site->blogname; ?></h2>
+    				<h2><?php echo get_bloginfo( 'name' ); ?></h2>
 
     				<div class="links">
-    					<a href="<?php echo get_admin_url( $site->blog_id ); ?>" class="link admin"><?php _e( 'Admin', 'list-network-sites' ); ?></a>
-    					<a href="<?php echo $site->siteurl; ?>" class="link site"><?php _e( 'Site', 'list-network-sites' ); ?></a>
+    					<a href="<?php echo get_admin_url( get_current_blog_id() ); ?>" class="link admin"><?php _e( 'Admin', 'list-network-sites' ); ?></a>
+                        <a href="<?php echo get_bloginfo( 'url' ); ?>" class="link site"><?php _e( 'Site', 'list-network-sites' ); ?></a>
+                        <?php do_action( 'lns_print_site_links', get_current_blog_id() ); ?>
     				</div>
 
     			</section>
 
-    		<?php endforeach; ?>
+        		<?php restore_current_blog(); ?>
+            <?php endforeach; ?>
     	</div>
 
     	<?php
