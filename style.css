@@ -18,6 +18,10 @@ Text Domain: list-network-sites
 	box-sizing: border-box;
 }
 
+html {
+	-webkit-font-smoothing: antialiased;
+}
+
 a, a:visited {
 	color: black;
 }
@@ -57,8 +61,13 @@ body {
 	text-align: center;
 }
 
-.tools {
-	margin: 20px 0;
+header h2 {
+	font-size: 1.2rem;
+}
+
+header h3 {
+	font-size: 1rem;
+	margin-bottom: 5px;
 }
 
 .search[type="search"] {
@@ -68,12 +77,23 @@ body {
 	width: 100%;
 	font-size: 1rem;
 	-webkit-appearance: none;
+	-webkit-transition: border-bottom-color 0.5s;
 	transition: border-bottom-color 0.5s;
+	margin-top: 0;
 }
 
 .search:focus {
 	outline: none;
 	border-bottom-color: black;
+}
+
+.submit {
+	overflow: auto;
+}
+
+.submit button {
+	float: right;
+	margin: 5px 0 0 0;
 }
 
 /*
@@ -103,6 +123,7 @@ body {
 	font-size: 0.8rem;
 	margin-right: 5px;
 	margin-bottom: 5px;
+	-webkit-transition: background 0.5s;
 	transition: background 0.5s;
 	display: inline-block;
 	-moz-appearance: none;
@@ -131,9 +152,16 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-transition: opacity 0.3s, visibility 0.15s;
 	transition: opacity 0.3s, visibility 0.15s;
 }
 
@@ -145,7 +173,17 @@ body {
 	height: 30px;
 	width: 30px;
 	display: block;
-	animation: rotate 1s infinite linear;
+	-webkit-animation: rotate 1s infinite linear;
+	        animation: rotate 1s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes rotate {
@@ -172,6 +210,7 @@ body {
 	height: 30px;
 	width: 30px;
 	display: inline-block;
+	-webkit-transition: background 0.2s;
 	transition: background 0.2s;
 }
 
@@ -229,6 +268,10 @@ footer p {
 
 	.container {
 		width: 90%;
+	}
+
+	.links, .filtering, .pagination, footer {
+		display: none;
 	}
 
 	.items {

@@ -43,23 +43,27 @@
 	<div class="container">
 
 		<header>
-			<form class="top-filtering" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+
+			<h1 class="site-name"><?php echo get_site_option('site_name'); ?></h1>
+
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 				<input type="hidden" name="action" value="lns_sites_form">
 
-				<h1 class="site-name"><?php echo get_site_option('site_name'); ?></h1>
+				<div class="links">
+					<h2><?php _e( 'Network Management', 'list-network-sites' ); ?></h2>
+					<a href="<?php echo network_admin_url( 'site-new.php' ); ?>" class="link"><?php _e( 'Add New Site', 'list-network-sites' ); ?></a>
+					<a href="<?php echo network_admin_url( 'users.php' ); ?>" class="link"><?php _e( 'All Users', 'list-network-sites' ); ?></a>
+					<a href="<?php echo network_admin_url( 'themes.php' ); ?>" class="link"><?php _e( 'Themes', 'list-network-sites' ); ?></a>
+					<a href="<?php echo network_admin_url( 'plugins.php' ); ?>" class="link"><?php _e( 'Plugins', 'list-network-sites' ); ?></a>
+					<a href="<?php echo network_admin_url( 'settings.php' ); ?>" class="link"><?php _e( 'Network Settings', 'list-network-sites' ); ?></a>
+				</div>
 
-				<div class="tools">
-					<div class="links">
-						<h2><?php _e( 'Network Management', 'list-network-sites' ); ?></h2>
-						<a href="<?php echo network_admin_url( 'site-new.php' ); ?>" class="link"><?php _e( 'Add New Site', 'list-network-sites' ); ?></a>
-						<a href="<?php echo network_admin_url( 'users.php' ); ?>" class="link"><?php _e( 'All Users', 'list-network-sites' ); ?></a>
-						<a href="<?php echo network_admin_url( 'themes.php' ); ?>" class="link"><?php _e( 'Themes', 'list-network-sites' ); ?></a>
-						<a href="<?php echo network_admin_url( 'plugins.php' ); ?>" class="link"><?php _e( 'Plugins', 'list-network-sites' ); ?></a>
-						<a href="<?php echo network_admin_url( 'settings.php' ); ?>" class="link"><?php _e( 'Network Settings', 'list-network-sites' ); ?></a>
-					</div>
+				<div class="filtering">
+
+					<h2>Filtering</h2>
 
 					<div class="sorting-method">
-						<h2><?php _e( 'Sorting Method', 'list-network-sites' ); ?></h2>
+						<h3><?php _e( 'Sorting Method', 'list-network-sites' ); ?></h3>
 
 						<select id="sorting-method" name="sorting_method">
 							<option value="alphabetical" <?php selected( 'alphabetical', $sorting_method ); ?>><?php _e( 'Alphabetical', 'list-network-sites' ); ?></a>
@@ -71,19 +75,28 @@
 					</div>
 
 					<div class="sorting-order">
-						<h2><?php _e( 'Sorting Order', 'list-network-sites' ); ?></h2>
+						<h3><?php _e( 'Sorting Order', 'list-network-sites' ); ?></h3>
 
 						<select id="sorting-order" name="sorting_order">
 							<option value="ascending" <?php selected( 'ascending', $sorting_order ); ?>><?php _e( 'Ascending', 'list-network-sites' ); ?></a>
 							<option value="descending" <?php selected( 'descending', $sorting_order ); ?>><?php _e( 'Descending', 'list-network-sites' ); ?></a>
 						</select>
 					</div>
+
+					<div class="search">
+						<h3><?php _e( 'Search', 'list-network-sites' ); ?></h3>
+
+						<input type="search" placeholder="<?php _e( 'Search sites by name', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus value="<?php echo get_query_var( 'sites_search' ); ?>" name="search">
+					</div>
+
+					<noscript>
+						<div class="submit">
+							<button type="submit" class="link filter-submit"><?php _e( 'Submit', 'list-network-sites' ); ?></button>
+						</div>
+					</noscript>
+
 				</div>
 
-				<h2><?php _e( 'Search by name', 'list-network-sites' ); ?></h2>
-				<input type="search" placeholder="<?php _e( 'Search sites', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus value="<?php echo get_query_var( 'sites_search' ); ?>" name="search">
-
-				<button type="submit" class="link filter-submit"><?php _e( 'Submit', 'list-network-sites' ); ?></button>
 			</form>
 
 		</header>
