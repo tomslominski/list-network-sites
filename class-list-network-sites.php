@@ -148,6 +148,13 @@ class List_Network_Sites {
         return $this->sites;
     }
 
+    /**
+     * Returns the HTML for the site list, including the pagination
+     * {@see List_Network_Sites::get_pagination()}.
+     *
+     * @return string Site list HTML.
+     * @since 1.1
+     */
     public function get_html() {
 
     	ob_start();
@@ -184,6 +191,13 @@ class List_Network_Sites {
     	return ob_get_clean();
     }
 
+    /**
+     * Returns the HTML for pagination used below the site list.
+     *
+     * @param int $current The current page of sites being displayed.
+     * @return string Pagination HTML.
+     * @since 1.1
+     */
     public function get_pagination( $current = 1 ) {
 
         if( $this->get_max_num_pages() < 2 ) {

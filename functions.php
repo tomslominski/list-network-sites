@@ -205,6 +205,14 @@ if( !function_exists( 'lns_js_get_sites' ) ) {
 
 if( !function_exists( 'lns_redirect_post' ) ) {
 
+	/**
+     * Function which redirects non-JS users to the correct
+	 * static sites list page.
+     *
+     * @param int $current The current page of sites being displayed.
+     * @return string Pagination HTML.
+     * @since 1.1
+     */
 	function lns_redirect_post() {
 
 		$url = lns_generate_url( $_POST );
@@ -220,6 +228,14 @@ if( !function_exists( 'lns_redirect_post' ) ) {
 
 if( !function_exists( 'lns_generate_url' ) ) {
 
+	/**
+     * Function for generating a URL to a list of sites, including
+	 * filtering options, paging and search options.
+     *
+     * @param int $current The current page of sites being displayed.
+     * @return string Pagination HTML.
+     * @since 1.1
+     */
 	function lns_generate_url( $input_params = array() ) {
 
 		$arrays = array(
