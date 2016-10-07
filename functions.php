@@ -87,6 +87,10 @@ if( !function_exists( 'ls_customizer' ) ) {
 			'default'     => 10
 		) );
 
+		$wp_customize->add_setting( 'ls_display_network_links' , array(
+			'default'     => 'display'
+		) );
+
 		// Add controls
 		$wp_customize->add_control( 'ls_sorting_method_control',
 			array(
@@ -109,7 +113,7 @@ if( !function_exists( 'ls_customizer' ) ) {
 				'label'    => __( 'Sorting order', 'list-network-sites' ),
 				'section'  => 'ls_main',
 				'settings' => 'ls_sorting_order',
-				'type'     => 'radio',
+				'type'     => 'select',
 				'choices'  => array(
 					'ascending'  => __( 'Ascending', 'list-network-sites' ),
 					'descending' => __( 'Descending', 'list-network-sites' ),
@@ -123,6 +127,19 @@ if( !function_exists( 'ls_customizer' ) ) {
 				'section'  => 'ls_main',
 				'settings' => 'ls_sites_per_page',
 				'type'     => 'number',
+			)
+		);
+
+		$wp_customize->add_control( 'ls_display_network_links_control',
+			array(
+				'label'    => __( '"Network Management" links', 'list-network-sites' ),
+				'section'  => 'ls_main',
+				'settings' => 'ls_display_network_links',
+				'type'     => 'select',
+				'choices'  => array(
+					'on'  => __( 'Display', 'list-network-sites' ),
+					'off' => __( 'Hide', 'list-network-sites' ),
+				)
 			)
 		);
 
