@@ -203,4 +203,86 @@ if( !function_exists( 'lns_js_get_sites' ) ) {
 
 }
 
+if( !function_exists( 'lns_redirect_post' ) ) {
+
+	function lns_redirect_post() {
+
+		$url = lns_generate_url( $_POST );
+	    wp_redirect( $url );
+		exit;
+
+	}
+
+	add_action( 'admin_post_nopriv_lns_sites_form', 'lns_redirect_post' );
+	add_action( 'admin_post_lns_sites_form', 'lns_redirect_post' );
+
+}
+
+if( !function_exists( 'lns_generate_url' ) ) {
+
+	function lns_generate_url( $input_params = array() ) {
+
+		$arrays = array(
+			'static_defaults' => array(
+				'sorting_method' => 'alphabetical',
+				'sorting_order' => 'ascending',
+				'page' => 1,
+			),
+			'site_defaults' => array(
+				'sorting_method' => get_theme_mod( 'ls_sorting_method' ),
+				'sorting_order' => get_theme_mod( 'ls_sorting_order' ),
+			),
+			'cookie_defaults' => array(
+				'sorting_method' => key_exists( 'lnsSortingMethod', $_COOKIE ) ? $_COOKIE[ 'lnsSortingMethod' ] : null,
+				'sorting_order' => key_exists( 'lnsSortingOrder', $_COOKIE ) ? $_COOKIE[ 'lnsSortingOrder' ] : null,
+			),
+			'query_vars' => array(
+				'sorting_method' => get_query_var( 'sites_sorting_method' ),
+				'sorting_order' => get_query_var( 'sites_sorting_order' ),
+				'page' => get_query_var( 'sites_page' ),
+				'search' => get_query_var( 'sites_search' )
+			),
+			'input_params' => $input_params
+		);
+
+		foreach( $arrays as $array ) {
+			if( is_array( $array ) ) {
+				foreach( $array as $param_name => $param_value ) {
+					// Only add valid values to the $params array
+					if( !in_array( $param_name, array( 'sorting_method', 'sorting_order', 'page', 'search' ) ) ) {
+						continue;
+					}
+
+					// Overwrite values of lesser importance if the array value is not empty
+					if( !empty( $param_value ) ) {
+						$params[$param_name] = $param_value;
+					}
+				}
+			}
+		}
+
+		$url = trailingslashit( get_site_url() ) . 'sites/';
+
+		foreach ( $params as $param => $value ) {
+			// Fill values with existing values of empty
+			if( empty( $value ) ) {
+				$params[$param] = get_query_var( $param );
+			}
+
+			// Special case
+			if( $param == 'page' && $value == 1 && empty( $params['search'] ) ) {
+				continue;
+			}
+
+			// Build URL
+			if( !empty( $value ) ) {
+				$url .= $value . '/';
+			}
+		}
+
+		return $url;
+
+	}
+
+}
 ?>

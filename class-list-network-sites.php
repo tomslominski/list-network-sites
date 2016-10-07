@@ -203,15 +203,17 @@ class List_Network_Sites {
 
                 <?php if( $current > 1 ) : ?>
                     <div class="section back-buttons">
-                        <a href="<?php echo $this->lns_generate_url( array( 'page' => 1,  ) ); ?>" data-page="1" class="button first" title="<?php _e( 'Go to the first page', 'list-network-sites' ); ?>">&laquo;</a>
-                        <a href="<?php echo $this->lns_generate_url( array( 'page' => $previous ) ); ?>" data-page="<?php echo $previous; ?>" class="button previous" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current - 1 ); ?>">&lsaquo;</a>
+                        <a href="<?php echo lns_generate_url( array( 'page' => 1 ) ); ?>" data-page="1" class="button first" title="<?php _e( 'Go to the first page', 'list-network-sites' ); ?>">&laquo;</a>
+                        <a href="<?php echo lns_generate_url( array( 'page' => $previous ) ); ?>" data-page="<?php echo $previous; ?>" class="button previous" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current - 1 ); ?>">&lsaquo;</a>
                     </div>
                 <?php endif; ?>
 
                 <div class="section pager">
-                    <form class="pager-form">
+                    <form class="pager-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+                        <input type="hidden" name="action" value="lns_sites_form">
+
                         <?php
-                            $input = '<input type="number" min="1" max="' . $maximum . '" value="' . $current . '">';
+                            $input = '<input type="number" min="1" max="' . $maximum . '" value="' . $current . '" name="page">';
 
                             printf( __( 'Page %1$s of %2$d', 'list-network-sites' ), $input, $maximum );
                         ?>
@@ -220,8 +222,8 @@ class List_Network_Sites {
 
                 <?php if( $current < $maximum ) : ?>
                     <div class="section next-buttons">
-                        <a href="<?php echo $this->lns_generate_url( array( 'page' => $next ) ); ?>" data-page="<?php echo $next; ?>" class="button next" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current + 1 ); ?>">&rsaquo;</a>
-                        <a href="<?php echo $this->lns_generate_url( array( 'page' => $maximum ) ); ?>" data-page="<?php echo $maximum; ?>" class="button last" title="<?php _e( 'Go to the last page', 'list-network-sites' ); ?>">&raquo;</a>
+                        <a href="<?php echo lns_generate_url( array( 'page' => $next ) ); ?>" data-page="<?php echo $next; ?>" class="button next" title="<?php printf( __( 'Go to the page %d', 'list-network-sites' ), $current + 1 ); ?>">&rsaquo;</a>
+                        <a href="<?php echo lns_generate_url( array( 'page' => $maximum ) ); ?>" data-page="<?php echo $maximum; ?>" class="button last" title="<?php _e( 'Go to the last page', 'list-network-sites' ); ?>">&raquo;</a>
                     </div>
                 <?php endif; ?>
 
@@ -230,38 +232,6 @@ class List_Network_Sites {
         <?php
 
         return ob_get_clean();
-
-    }
-
-    public function lns_generate_url( $params = array() ) {
-
-    	$params = array_merge( array(
-    		'sorting_method' => get_query_var( 'sites_sorting_method' ),
-    		'sorting_order' => get_query_var( 'sites_sorting_order' ),
-            'page' => get_query_var( 'sites_page' ),
-            'search' => get_query_var( 'sites_search' )
-    	), $params );
-
-    	$url = trailingslashit( get_site_url() ) . 'sites/';
-
-    	foreach ( $params as $param => $value ) {
-    		// Fill values with existing values of empty
-    		if( empty( $value ) ) {
-    			$params[$param] = get_query_var( $param );
-    		}
-
-            // Special case
-            if( $param == 'page' && $value == 1 && !empty( $params['search'] ) ) {
-                continue;
-            }
-
-    		// Build URL
-    		if( !empty( $value ) ) {
-    			$url .= $value . '/';
-    		}
-    	}
-
-    	return $url;
 
     }
 

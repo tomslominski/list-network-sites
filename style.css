@@ -94,7 +94,7 @@ body {
 	margin-bottom: 1rem;
 }
 
-a.link {
+.link, .link:visited {
 	text-decoration: none;
 	color: white;
 	background: #4D4D4D;
@@ -105,9 +105,12 @@ a.link {
 	margin-bottom: 5px;
 	transition: background 0.5s;
 	display: inline-block;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border: none;
 }
 
-a.link:hover {
+.link:hover {
 	background: #2F2F2F;
 }
 
