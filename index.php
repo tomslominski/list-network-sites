@@ -88,7 +88,7 @@
 					<div class="search">
 						<h3><?php _e( 'Search', 'list-network-sites' ); ?></h3>
 
-						<input type="search" placeholder="<?php _e( 'Search sites by name', 'list-network-sites' ); ?>" id="filter-field" class="search" autofocus value="<?php echo get_query_var( 'sites_search' ); ?>" name="search">
+						<input type="search" placeholder="<?php _e( 'Search sites by name', 'list-network-sites' ); ?>" id="search-field" class="search" autofocus value="<?php echo get_query_var( 'sites_search' ); ?>" name="search">
 					</div>
 
 					<noscript>

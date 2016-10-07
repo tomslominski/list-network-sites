@@ -105,7 +105,7 @@ jQuery(document).ready(function( $ ) {
 			 */
 			search: function() {
 
-				var value = $( '#filter-field' ).val();
+				var value = $( '#search-field' ).val();
 				$( 'body' ).data( 'lns-search', value );
 				$( 'body' ).data( 'lns-page', 1 );
 
@@ -148,14 +148,14 @@ jQuery(document).ready(function( $ ) {
 	/* ============================================
 	  Event handlers
 	============================================ */
-	$( '#filter-field' ).keyup(function() {
+	$( '#search-field' ).keyup(function() {
 		delay( LNS.handle.search, 500 );
 	});
 
-	$( '.container header' ).on( 'search', '#filter-field', this, LNS.handle.search );
+	$( 'header .filtering' ).on( 'search', '#search-field', this, LNS.handle.search );
 	$( '.items-wrapper' ).on( 'click', '.pagination .button', this, LNS.handle.pageButtons );
 	$( '.items-wrapper' ).on( 'submit', '.pagination .pager-form', this, LNS.handle.pageInput );
-	$( '.container .tools' ).on( 'change', '.sorting-method', this, LNS.handle.sortingMethod );
-	$( '.container .tools' ).on( 'change', '.sorting-order', this, LNS.handle.sortingOrder );
+	$( 'header .filtering' ).on( 'change', '#sorting-method', this, LNS.handle.sortingMethod );
+	$( 'header .filtering' ).on( 'change', '#sorting-order', this, LNS.handle.sortingOrder );
 
 });
