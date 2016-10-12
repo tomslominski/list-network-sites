@@ -82,15 +82,17 @@ class List_Network_Sites {
 			$this->sites = wp_get_sites();
 		}
 
+        // Backwards compatibility
+        foreach ( $this->sites as $id => $site ) {
+            if( function_exists( 'get_sites' ) ) {
+    			$this->sites[$id] = get_blog_details( $site->blog_id );
+    		} else {
+    			$this->sites[$id] = get_blog_details( $site['blog_id'] );
+    		}
+        }
+
         // Filter the sites
         foreach ( $this->sites as $id => $site ) {
-            // Get more details
-            if( function_exists( 'get_sites' ) ) {
-    			$this->sites[$id] = get_blog_details( $site->id );
-    		} else {
-                $this->sites[$id] = get_blog_details( $site['blog_id'] );
-    		}
-
             // Remove primary site
             if( $this->args['include_primary'] == false && $site->blog_id == BLOG_ID_CURRENT_SITE ) {
                 unset( $this->sites[$id] );
