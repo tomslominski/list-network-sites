@@ -64,7 +64,7 @@ if( !function_exists( 'ls_customizer' ) ) {
 	/**
 	 * Register settings to be displayed in the WP customiser
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param \WP_Customize_Manager $wp_customize Instance of WP Customizer
 	 */
 	function ls_customizer( $wp_customize ) {
@@ -155,7 +155,7 @@ if( !function_exists( 'lns_filter_query_vars' ) ) {
 	 * Filter query variables to enable pagination.
 	 *
 	 * @param array $vars Array of existing query variables.
-	 * @since 1.1
+	 * @since 2.0
 	 */
 	function lns_filter_query_vars( $vars ) {
 
@@ -177,7 +177,7 @@ if( !function_exists( 'lns_populate_query_vars' ) ) {
 	 * Set up pretty permalinks for the sites pagination. The structure
 	 * is: example.com/sites/[sorting_method]/[sorting_order]/[page]/[search]
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 */
 	function lns_populate_query_vars() {
 
@@ -198,7 +198,7 @@ if( !function_exists( 'lns_js_get_sites' ) ) {
 	 * WP AJAX function for getting the HTML of the list of sites.
 	 * Called every time the user filters the list of sites.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 */
 	function lns_js_get_sites() {
 
@@ -228,7 +228,7 @@ if( !function_exists( 'lns_redirect_post' ) ) {
      *
      * @param int $current The current page of sites being displayed.
      * @return string Pagination HTML.
-     * @since 1.1
+     * @since 2.0
      */
 	function lns_redirect_post() {
 
@@ -251,7 +251,7 @@ if( !function_exists( 'lns_generate_url' ) ) {
      *
      * @param int $current The current page of sites being displayed.
      * @return string Pagination HTML.
-     * @since 1.1
+     * @since 2.0
      */
 	function lns_generate_url( $input_params = array() ) {
 
@@ -325,7 +325,7 @@ if( !function_exists( 'lns_activation' ) ) {
      * Function to be run when the theme is activated. Resets
 	 * rewrite rules.
      *
-     * @since 1.1
+     * @since 2.0
      */
 	function lns_activation() {
 		flush_rewrite_rules();

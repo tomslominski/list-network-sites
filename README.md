@@ -16,6 +16,7 @@ Features
 * Your filtering criteria is always remembered.
 * Customize how the sites are displayed using the WordPress Customizer.
 * Hook into the theme to make changes without editing the theme.
+* Share links to a particular search, page or filtering method.
 
 Installation
 ------------
@@ -27,6 +28,8 @@ Installation
 Upgrade
 -------
 Follow the first two steps of the Installation process, making sure to rename the folder to what it was named previously.
+
+__When updating the theme from version 1.0 to 2.0, make sure to go to Settings → Permalinks → Save Changes to force WordPress to update the permalink structure and see this theme's permalink structure.__
 
 Translation
 -----------

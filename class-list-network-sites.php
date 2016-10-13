@@ -4,7 +4,7 @@
  * Class for generating an array of sites in a network, with options
  * to sort the array. Also provides supporting functions and pagination.
  *
- * @since 1.1
+ * @since 2.0
  */
 class List_Network_Sites {
 
@@ -12,7 +12,7 @@ class List_Network_Sites {
      * Arguments used to create the site query.
      *
      * @var array $args
-     * @since 1.1
+     * @since 2.0
      */
     public $args = null;
 
@@ -20,7 +20,7 @@ class List_Network_Sites {
      * Sites found by the site query.
      *
      * @var array $sites
-     * @since 1.1
+     * @since 2.0
      */
     public $sites = null;
 
@@ -28,7 +28,7 @@ class List_Network_Sites {
      * Sites found by the site query.
      *
      * @var int $total_sites
-     * @since 1.1
+     * @since 2.0
      */
     public $total_sites = null;
 
@@ -37,7 +37,7 @@ class List_Network_Sites {
      * gets the requested sites.
      *
      * @param array $args Arguments which describe what sites should be queried.
-     * @since 1.1
+     * @since 2.0
      */
     public function __construct( $args = array() ) {
 
@@ -71,7 +71,7 @@ class List_Network_Sites {
      * Gets sites, filters them, sorts them and deals with paging.
      *
      * @return array An array of sites.
-     * @since 1.1
+     * @since 2.0
      */
     public function get_sites() {
 
@@ -127,7 +127,7 @@ class List_Network_Sites {
      * Returns true if this query has found any sites.
      *
      * @return bool Whether this query has found any sites.
-     * @since 1.1
+     * @since 2.0
      */
     public function has_sites() {
 
@@ -144,7 +144,7 @@ class List_Network_Sites {
      * displaying in the theme.
      *
      * @return array The sites array.
-     * @since 1.1
+     * @since 2.0
      */
     public function return_sites() {
         return $this->sites;
@@ -155,7 +155,7 @@ class List_Network_Sites {
      * {@see List_Network_Sites::get_pagination()}.
      *
      * @return string Site list HTML.
-     * @since 1.1
+     * @since 2.0
      */
     public function get_html() {
 
@@ -198,7 +198,7 @@ class List_Network_Sites {
      *
      * @param int $current The current page of sites being displayed.
      * @return string Pagination HTML.
-     * @since 1.1
+     * @since 2.0
      */
     public function get_pagination( $current = 1 ) {
 
@@ -256,7 +256,7 @@ class List_Network_Sites {
      * in the query. Used for pagination.
      *
      * @return int Number of pages.
-     * @since 1.1
+     * @since 2.0
      */
     public function get_max_num_pages() {
         return ceil( $this->total_sites / $this->args['posts_per_page'] );
@@ -266,7 +266,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites alphabetically in descending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -278,7 +278,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites alphabetically in ascending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -290,7 +290,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by date registered in descending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -302,7 +302,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by date registered in ascending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -314,7 +314,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by date updated in descending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -326,7 +326,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by date updated in ascending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -338,7 +338,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by post count in descending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -350,7 +350,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by post count in ascending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -362,7 +362,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by site ID in descending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
@@ -374,7 +374,7 @@ class List_Network_Sites {
 	 * usort() function for sorting sites by site ID in ascending order.
 	 * To be used in {@see List_Network_Sites::get_sites()}.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 * @param string $a First value to be compared
 	 * @param string $b Second value to be compared
 	 */
