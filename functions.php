@@ -318,4 +318,20 @@ if( !function_exists( 'lns_generate_url' ) ) {
 	}
 
 }
+
+if( !function_exists( 'lns_activation' ) ) {
+
+	/**
+     * Function to be run when the theme is activated. Resets
+	 * rewrite rules.
+     *
+     * @since 1.1
+     */
+	function lns_activation() {
+		flush_rewrite_rules();
+	}
+
+	add_action( 'after_switch_theme', 'lns_activation' );
+
+}
 ?>
