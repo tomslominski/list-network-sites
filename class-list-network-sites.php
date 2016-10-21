@@ -295,7 +295,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_date_registered_descending($a, $b) {
-		return strtotime( $b->registered ) - strtotime( $a->registered );
+		return strtotime( $b->registered ) > strtotime( $a->registered );
 	}
 
 	/**
@@ -307,7 +307,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_date_registered_ascending($a, $b) {
-		return strtotime( $a->registered ) - strtotime( $b->registered );
+		return strtotime( $a->registered ) > strtotime( $b->registered );
 	}
 
 	/**
@@ -319,7 +319,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_date_updated_descending($a, $b) {
-		return strtotime( $b->last_updated ) - strtotime( $a->last_updated );
+		return strtotime( $b->last_updated ) > strtotime( $a->last_updated );
 	}
 
 	/**
@@ -331,7 +331,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_date_updated_ascending( $a, $b ) {
-		return strtotime( $a->last_updated ) - strtotime( $b->last_updated );
+		return strtotime( $a->last_updated ) > strtotime( $b->last_updated );
 	}
 
 	/**
@@ -343,7 +343,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_post_count_descending($a, $b) {
-		return $b->post_count - $a->post_count;
+		return $b->post_count > $a->post_count;
 	}
 
 	/**
@@ -355,7 +355,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_post_count_ascending($a, $b) {
-		return $a->post_count - $b->post_count;
+		return $a->post_count > $b->post_count;
 	}
 
 	/**
@@ -367,7 +367,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_id_descending($a, $b) {
-		return $b->blog_id - $a->blog_id;
+		return $b->blog_id > $a->blog_id;
 	}
 
 	/**
@@ -379,7 +379,7 @@ class List_Network_Sites {
 	 * @param string $b Second value to be compared
 	 */
 	function sorting_id_ascending($a, $b) {
-		return $a->blog_id - $b->blog_id;
+		return $a->blog_id > $b->blog_id;
 	}
 
 }

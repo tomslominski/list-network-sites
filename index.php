@@ -9,6 +9,7 @@
 </head>
 
 <?php
+	// Figure out what we're displaying based on cookies, theme defaults, query vars, global defaults
 	$sorting_method_cookie = key_exists( 'lnsSortingMethod', $_COOKIE ) ? $_COOKIE[ 'lnsSortingMethod' ] : null;
 	$sorting_method_setting = get_theme_mod( 'ls_sorting_method' );
 	$sorting_method_query = get_query_var( 'sites_sorting_method' );
@@ -36,6 +37,11 @@
 	} else {
 		$sorting_order = 'ascending';
 	}
+
+	$page = get_query_var( 'sites_page' );
+	$page = !empty( $page ) ? $page : 1;
+
+	$search = get_query_var( 'sites_search' );
 ?>
 
 <body <?php body_class(); ?> data-lns-sorting-method="<?php echo $sorting_method; ?>" data-lns-sorting-order="<?php echo $sorting_order; ?>" data-lns-page="<?php echo get_query_var( 'sites_page' ); ?>">
@@ -108,15 +114,10 @@
 
 			<div class="items-container">
 				<?php
-					$sorting_method = get_query_var( 'sites_sorting_method' );
-					$sorting_order = get_query_var( 'sites_sorting_order' );
-					$page = get_query_var( 'sites_page' );
-					$search = get_query_var( 'sites_search' );
-
 					$site_query = new List_Network_Sites( array(
-						'sorting' => !empty( $sorting_method ) ? $sorting_method : 'id',
-						'order' => !empty( $sorting_order ) ? $sorting_order : 'ascending',
-						'page' => !empty( $page ) ? $page : 1,
+						'sorting' => $sorting_method,
+						'order' => $sorting_order,
+						'page' => $page,
 						'search' => $search,
 					) );
 
