@@ -203,7 +203,7 @@ if( !function_exists( 'lns_js_get_sites' ) ) {
 	function lns_js_get_sites() {
 
 		$site_query = new List_Network_Sites( array(
-			'sorting' => !empty( $_POST['sorting'] ) ? $_POST['sorting'] : 'id',
+			'sorting' => !empty( $_POST['sorting'] ) ? $_POST['sorting'] : 'alphabetical',
 			'order' => !empty( $_POST['order'] ) ? $_POST['order'] : 'ascending',
 			'page' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
 			'search' => isset( $_POST['search_value'] ) ? $_POST['search_value'] : false,

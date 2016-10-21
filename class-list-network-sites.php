@@ -46,8 +46,8 @@ class List_Network_Sites {
         // Merge with defaults
         $this->args = array_merge( array(
             'offset' => 0,
-            'sorting' => 'id',
-            'order' => 'descending',
+            'sorting' => 'alphabetical',
+            'order' => 'ascending',
             'include_primary' => true,
             'posts_per_page' => !empty( $per_page ) ? $per_page : 10,
             'page' => 1,

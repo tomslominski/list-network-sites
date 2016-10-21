@@ -21,7 +21,7 @@
 	} elseif( !empty( $sorting_method_setting ) ) {
 		$sorting_method = $sorting_method_setting;
 	} else {
-		$sorting_method = 'id';
+		$sorting_method = 'alphabetical';
 	}
 
 	$sorting_order_cookie = key_exists( 'lnsSortingOrder', $_COOKIE ) ? $_COOKIE[ 'lnsSortingOrder' ] : null;
