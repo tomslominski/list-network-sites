@@ -101,7 +101,7 @@ jQuery(document).ready(function( $ ) {
 			},
 
 			/**
-			 * Handler for the search field.
+			 * Handler for the search field - delayed
 			 */
 			search: function() {
 
@@ -111,6 +111,14 @@ jQuery(document).ready(function( $ ) {
 
 				LNS.getSites();
 
+			},
+
+			/**
+			 * When the form is submitted but JS is available
+			 * there is no need to reload the page
+			 */
+			formSubmit: function( e ) {
+				e.preventDefault();
 			},
 
 			/**
@@ -153,6 +161,7 @@ jQuery(document).ready(function( $ ) {
 	});
 
 	$( 'header .filtering' ).on( 'search', '#search-field', this, LNS.handle.search );
+	$( '.container' ).on( 'submit', '.filtering-form', this, LNS.handle.formSubmit );
 	$( '.items-wrapper' ).on( 'click', '.pagination .button', this, LNS.handle.pageButtons );
 	$( '.items-wrapper' ).on( 'submit', '.pagination .pager-form', this, LNS.handle.pageInput );
 	$( 'header .filtering' ).on( 'change', '#sorting-method', this, LNS.handle.sortingMethod );

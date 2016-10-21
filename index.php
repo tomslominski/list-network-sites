@@ -52,7 +52,7 @@
 
 			<h1 class="site-name"><?php echo get_site_option('site_name'); ?></h1>
 
-			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="filtering-form">
 				<input type="hidden" name="action" value="lns_sites_form">
 
 				<?php if( get_theme_mod( 'ls_display_network_links' ) != 'off' ) : ?>
