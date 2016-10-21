@@ -206,7 +206,7 @@ if( !function_exists( 'lns_js_get_sites' ) ) {
 			'sorting' => !empty( $_POST['sorting'] ) ? $_POST['sorting'] : 'id',
 			'order' => !empty( $_POST['order'] ) ? $_POST['order'] : 'ascending',
 			'page' => !empty( $_POST['page'] ) ? $_POST['page'] : 1,
-			'search' => $_POST['search_value'],
+			'search' => isset( $_POST['search_value'] ) ? $_POST['search_value'] : false,
 		) );
 
 		echo $site_query->get_html();
