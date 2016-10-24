@@ -37,6 +37,10 @@ jQuery(document).ready(function( $ ) {
 					$( '.items-overlay' ).addClass( 'hide' );
 					$( '.items-overlay' ).removeClass( 'show' );
 
+					$('html, body').animate( {
+	                    scrollTop: $( '.items-container' ).offset().top - $( '#wpadminbar' ).height() - 10
+	                }, 300);
+
 					LNS.updateUrl();
 				}
 			});
